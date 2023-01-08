@@ -1,5 +1,7 @@
 using Hotels.API.Configurations;
+using Hotels.API.Contracts;
 using Hotels.API.Data;
+using Hotels.API.Repository;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -29,6 +31,10 @@ builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(MapperConfig));
+
+// repos
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IHotelsRepository, HotelsRepository>();
 
 var app = builder.Build();
 

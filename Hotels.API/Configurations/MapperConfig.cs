@@ -9,6 +9,7 @@ namespace Hotels.API.Configurations
         public MapperConfig()
         {
             CreateMap<Hotel, HotelDTO>().ReverseMap();
+            CreateMap<Hotel, UpdateHotelDTO>().ReverseMap();
         }
     }
 }
