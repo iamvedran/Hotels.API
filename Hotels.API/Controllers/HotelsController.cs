@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Hotels.API.Data;
+using Hotels.API.Models.Hotel;
 
 namespace Hotels.API.Controllers
 {
@@ -14,10 +16,12 @@ namespace Hotels.API.Controllers
     public class HotelsController : ControllerBase
     {
         private readonly HotelsDbContext _context;
+        private readonly IMapper _mapper;
 
-        public HotelsController(HotelsDbContext context)
+        public HotelsController(HotelsDbContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: api/Hotels
@@ -49,7 +53,7 @@ namespace Hotels.API.Controllers
         {
             if (id != hotel.Id)
             {
-                return BadRequest();
+                return BadRequest("Invalid record");
             }
 
             _context.Entry(hotel).State = EntityState.Modified;
@@ -76,8 +80,18 @@ namespace Hotels.API.Controllers
         // POST: api/Hotels
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Hotel>> PostHotel(Hotel hotel)
+        public async Task<ActionResult<Hotel>> PostHotel(HotelDTO createHotel)
         {
+            //Hotel hotel = new Hotel
+            //{
+            //    Name = hotel.Name,
+            //    Price = hotel.Price,
+            //    Latutude = hotel.Latutude,
+            //    Longitude = hotel.Longitude
+            //};
+
+            Hotel hotel = _mapper.Map<Hotel>(createHotel);
+
             _context.Hotels.Add(hotel);
             await _context.SaveChangesAsync();
 
