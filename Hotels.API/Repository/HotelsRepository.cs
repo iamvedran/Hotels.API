@@ -5,16 +5,19 @@ using GeoCoordinatePortable;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.CodeAnalysis;
 using NuGet.Common;
+using AutoMapper;
 
 namespace Hotels.API.Repository
 {
     public class HotelsRepository : GenericRepository<Hotel>, IHotelsRepository    
     {
         private readonly HotelsDbContext _context;
+        private readonly IMapper _mapper;
 
-        public HotelsRepository(HotelsDbContext context) : base(context)
+        public HotelsRepository(HotelsDbContext context, IMapper mapper) : base(context, mapper)
         {
-            _context = context;
+            this._context = context;
+            this._mapper = mapper;
         }
 
         /// <summary>

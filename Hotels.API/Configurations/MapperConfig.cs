@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Hotels.API.Data;
 using Hotels.API.Models.Hotel;
+using System.Reflection;
 
 namespace Hotels.API.Configurations
 {
@@ -10,6 +11,8 @@ namespace Hotels.API.Configurations
         {
             CreateMap<Hotel, HotelDTO>().ReverseMap();
             CreateMap<Hotel, UpdateHotelDTO>().ReverseMap();
+            //CreateMap<Hotel, Hotel>();
+
         }
     }
 }

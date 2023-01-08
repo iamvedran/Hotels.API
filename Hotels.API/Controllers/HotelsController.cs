@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Hotels.API.Data;
 using Hotels.API.Models.Hotel;
 using System.Diagnostics.Metrics;
+using Hotels.API.Models;
 
 namespace Hotels.API.Controllers
 {
@@ -27,12 +28,21 @@ namespace Hotels.API.Controllers
         }
 
         // GET: api/Hotels
-        [HttpGet]
+        [HttpGet("GetAll")]
         public async Task<ActionResult<IEnumerable<Hotel>>> GetHotels()
         {
             var hotels = await _hotelsRepository.GetAllAsync();
             return Ok(hotels);
         }
+
+        // GET: api/Countries/?StartIndex=0&pagesize=3&PageNumber=1
+        [HttpGet]
+        public async Task<ActionResult<PagedResult<HotelDTO>>> GetPagedCountries([FromQuery] QueryParameters queryParameters)
+        {
+            var pagedCountriesResult = await _hotelsRepository.GetAllAsync<HotelDTO>(queryParameters);
+            return Ok(pagedCountriesResult);
+        }
+
 
         // GET: api/Hotels/5
         [HttpGet("{id}")]
