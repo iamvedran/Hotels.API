@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.CodeAnalysis;
 using NuGet.Common;
 using AutoMapper;
+using Hotels.API.Models;
+using Hotels.API.Models.Hotel;
+using AutoMapper.QueryableExtensions;
 
 namespace Hotels.API.Repository
 {
@@ -26,8 +29,9 @@ namespace Hotels.API.Repository
         /// <param name="latitude"></param>
         /// <param name="longitude"></param>
         /// <param name="term">price (default), distance</param>
+        /// <param name="queryParameters">pagination parameters</param>
         /// <returns></returns>
-        public Task<List<Hotel>> FindCheapestAndNearesHotel(double latitude, double longitude, string term="")
+        public  Task<PagedResult<HotelDTO>> FindCheapestAndNearesHotel( double latitude, double longitude, string term, QueryParameters queryParameters)
         {
             var hotels = _context.Hotels.AsNoTracking().OrderBy(p => p.Price);
 
@@ -59,8 +63,20 @@ namespace Hotels.API.Repository
                     break;
             }
 
+            var totalSize = result.Count();
+            var items = result
+                .Skip(queryParameters.StartIndex)
+                .Take(queryParameters.PageSize);
 
-            return Task.FromResult(result);
+            var rez = new PagedResult<HotelDTO>
+            {
+                Items = _mapper.Map<List<HotelDTO>>(items),
+                PageNumber = queryParameters.PageNumber,
+                RecordNumber = queryParameters.PageSize,
+                TotalCount = totalSize
+            };
+
+            return Task.FromResult(rez);
         }
 
 

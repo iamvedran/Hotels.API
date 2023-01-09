@@ -1,5 +1,7 @@
 ﻿using Hotels.API.Data;
 using System.Diagnostics.Metrics;
+using Hotels.API.Models;
+using Hotels.API.Models.Hotel;
 
 namespace Hotels.API.Contracts
 {
@@ -12,6 +14,6 @@ namespace Hotels.API.Contracts
         /// <param name="longitude"></param>
         /// <param name="term">price (default), distance</param>
         /// <returns></returns>
-        Task<List<Hotel>> FindCheapestAndNearesHotel(double latitude, double longitude, string term);
+        Task<PagedResult<HotelDTO>> FindCheapestAndNearesHotel(double latitude, double longitude, string term, QueryParameters queryParameters);
     }
 }

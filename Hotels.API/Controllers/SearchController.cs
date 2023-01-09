@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Hotels.API.Contracts;
 using Hotels.API.Data;
+using Hotels.API.Models.Hotel;
+using Hotels.API.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,10 +22,10 @@ namespace Hotels.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Hotel>>> FindNearest(double latitude, double longitude, String? term)
+        public async Task<ActionResult<PagedResult<HotelDTO>>> FindNearest(double latitude, double longitude, String? term, [FromQuery] QueryParameters queryParameters)
         {
-            var hotels = await _hotelsRepository.FindCheapestAndNearesHotel(latitude, longitude, term);
-            return Ok(hotels);
+            var pagedCountriesResult = await _hotelsRepository.FindCheapestAndNearesHotel(latitude, longitude, term, queryParameters);
+            return Ok(pagedCountriesResult);
         }
     }
 }

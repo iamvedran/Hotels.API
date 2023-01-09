@@ -20,11 +20,13 @@ namespace Hotels.API.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IHotelsRepository _hotelsRepository;
+        private readonly ILogger<HotelsController> _logger;
 
-        public HotelsController( IMapper mapper, IHotelsRepository hotelsRepository)
+        public HotelsController( IMapper mapper, IHotelsRepository hotelsRepository, ILogger<HotelsController> logger)
         {
             _mapper = mapper;
             _hotelsRepository = hotelsRepository;
+            _logger = logger;
         }
 
         // GET: api/Hotels
@@ -37,7 +39,7 @@ namespace Hotels.API.Controllers
 
         // GET: api/Countries/?StartIndex=0&pagesize=3&PageNumber=1
         [HttpGet]
-        public async Task<ActionResult<PagedResult<HotelDTO>>> GetPagedCountries([FromQuery] QueryParameters queryParameters)
+        public async Task<ActionResult<PagedResult<HotelDTO>>> GetPagedHotels([FromQuery] QueryParameters queryParameters)
         {
             var pagedCountriesResult = await _hotelsRepository.GetAllAsync<HotelDTO>(queryParameters);
             return Ok(pagedCountriesResult);
@@ -80,15 +82,17 @@ namespace Hotels.API.Controllers
             {
                 await _hotelsRepository.UpdateAsync(record);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException ex)
             {
                 if (!await HotelExists(id))
                 {
+                    _logger.LogWarning($"No records found in hotel update {id}");
                     return NotFound();
                 }
                 else
                 {
-                    throw;
+                    _logger.LogError(ex, $"Error in Hotel update {id}");
+                    return Problem($"Error in Hotel update {id}", statusCode: 500);
                 }
             }
 
