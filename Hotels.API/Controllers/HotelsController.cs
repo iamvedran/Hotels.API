@@ -11,11 +11,13 @@ using Hotels.API.Data;
 using Hotels.API.Models.Hotel;
 using System.Diagnostics.Metrics;
 using Hotels.API.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Hotels.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class HotelsController : ControllerBase
     {
         private readonly IMapper _mapper;
