@@ -21,6 +21,13 @@ namespace Hotels.API.Controllers
             _hotelsRepository = hotelsRepository;
         }
 
+        /// <summary>
+        /// Find cheapest or nearest location
+        /// </summary>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <param name="term">price (default), distance</param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<PagedResult<HotelDTO>>> FindNearest(double latitude, double longitude, String? term, [FromQuery] QueryParameters queryParameters)
         {

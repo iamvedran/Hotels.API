@@ -17,6 +17,12 @@ namespace Hotels.API.Controllers
         }
 
         // POST: api/Account/login
+
+        /// <summary>
+        /// login user, hardcoded for testing
+        /// </summary>
+        /// <param name="loginDto"></param>
+        /// <returns>JTW Token</returns>
         [HttpPost]
         [Route("login")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -15,6 +15,12 @@ namespace Hotels.API.Repository
         {
             _configuration = configuration;
         }
+
+        /// <summary>
+        /// login user, hardcoded for testing
+        /// </summary>
+        /// <param name="loginDto"></param>
+        /// <returns>JWT Token</returns>
         public async Task<AuthResponseDTO> Login(LoginDTO loginDto)
         {
             if (loginDto.Email=="vedran@gmail.com" && loginDto.Password == "123456")
@@ -27,6 +33,11 @@ namespace Hotels.API.Repository
             return null;
         }
 
+        /// <summary>
+        /// Generate JWT token
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns>JWT Token</returns>
         private async Task<string> GenerateToken(string email)
         {
             var securitykey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
