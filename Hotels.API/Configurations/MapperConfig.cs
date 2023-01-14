@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Hotels.API.Data;
 using Hotels.API.Models.Hotel;
-using System.Reflection;
 
 namespace Hotels.API.Configurations
 {

@@ -1,14 +1,11 @@
 ﻿using Hotels.API.Contracts;
 using Hotels.API.Data;
-using System.Diagnostics.Metrics;
 using GeoCoordinatePortable;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.CodeAnalysis;
-using NuGet.Common;
 using AutoMapper;
 using Hotels.API.Models;
 using Hotels.API.Models.Hotel;
-using AutoMapper.QueryableExtensions;
+
 
 namespace Hotels.API.Repository
 {

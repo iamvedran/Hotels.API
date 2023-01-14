@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using Hotels.API.Contracts;
-using Hotels.API.Data;
 using Hotels.API.Models.Hotel;
 using Hotels.API.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hotels.API.Controllers

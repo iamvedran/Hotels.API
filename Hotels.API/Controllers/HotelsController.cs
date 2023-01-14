@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using AutoMapper;
 using Hotels.API.Contracts;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Hotels.API.Data;
 using Hotels.API.Models.Hotel;
-using System.Diagnostics.Metrics;
 using Hotels.API.Models;
 using Microsoft.AspNetCore.Authorization;
 

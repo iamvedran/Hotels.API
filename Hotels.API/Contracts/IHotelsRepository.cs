@@ -1,5 +1,4 @@
 ﻿using Hotels.API.Data;
-using System.Diagnostics.Metrics;
 using Hotels.API.Models;
 using Hotels.API.Models.Hotel;
 
