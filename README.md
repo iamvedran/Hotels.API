@@ -9,6 +9,11 @@ This is a demo project showcasing a web API for hotel management. The API allows
 - Add a new hotel to the system
 - Update existing hotel details
 - Delete a hotel from the system
+- JWT Security: The application uses JWT (JSON Web Tokens) to secure the API and handle user authentication and authorization.
+- AutoMapper for object mapping
+- Serilog for structured logging capabilities
+- Swagger API Documentation: Swagger is integrated into the project for generating API documentation, making it easier to explore and understand the available endpoints.
+- Unit Testing with nUnit: The project includes simple token a unit test written using nUnit framework to ensure the correctness of individual components and functionalities.
 
 ## Technologies Used
 
